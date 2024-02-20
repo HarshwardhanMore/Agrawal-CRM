@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getAllData } from "../services/service";
 import { Card } from "antd";
 import * as XLSX from "xlsx";
+import { DownloadOutlined } from '@ant-design/icons';
+
 
 const SeeCompanyInformation = () => {
   const [data, setData] = useState([]);
@@ -43,7 +45,9 @@ const SeeCompanyInformation = () => {
 
   return (
     <div>
-      <button onClick={downloadExcel}>Download Excel</button>
+      <div className=" h-16">
+        <button className=" absolute top-8 right-8 z-10 bg-white border-transparent shadow-md rounded-full px-2 aspect-square cursor-pointer" onClick={downloadExcel}><DownloadOutlined className=" text-xl" /></button>
+      </div>
       <div>
         {data.map((i) => {
           return (

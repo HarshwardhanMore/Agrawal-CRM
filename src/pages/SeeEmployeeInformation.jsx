@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getAllData } from "../services/service";
 import { Card } from "antd";
 import { Badge } from "antd";
+import * as XLSX from "xlsx";
+import { DownloadOutlined } from '@ant-design/icons';
 
 const SeeEmployeeInformation = () => {
   const [data, setData] = useState([]);
@@ -19,8 +21,38 @@ const SeeEmployeeInformation = () => {
     fetchData();
   }, []);
 
+  const downloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const blob = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "employee_data.xlsx";
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div>
+      <div className=" h-16">
+        <button
+          className=" absolute top-8 right-8 z-10 bg-white border-transparent shadow-md rounded-full px-2 aspect-square cursor-pointer"
+          onClick={downloadExcel}
+        >
+          <DownloadOutlined className=" text-xl" />
+        </button>
+      </div>
       <div>
         {data.map((i) => {
           return (

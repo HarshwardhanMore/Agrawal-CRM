@@ -49,6 +49,7 @@ const App = () => {
         style={{
           minHeight: "100vh",
         }}
+        className=" overflow-hidden"
       >
         <Sider
           collapsible
@@ -57,7 +58,10 @@ const App = () => {
           theme="light"
           className=" sticky top-0 left-0 h-screen"
         >
-          <div className="demo-logo-vertical h-16">hi</div>
+          <div className="demo-logo-vertical h-16 w-full flex items-center justify-center">
+            {!collapsed && <span className=" font-semibold text-lg text-blue-600 underline">Agrawal Job Portal</span>}
+            {collapsed && <span className=" font-semibold text-lg text-blue-600 underline">AJP</span>}
+          </div>
           {/* <Menu
           theme="light"
           defaultSelectedKeys={["1"]}
@@ -67,13 +71,14 @@ const App = () => {
           <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline">
             {items.map((item) => (
               <Menu.Item key={item.key} icon={item.icon}>
-                <Link to={item.path}>{item.label}</Link>
+                <Link to={item.path} className=" font-semibold">
+                  {item.label}
+                </Link>
               </Menu.Item>
             ))}
           </Menu>
         </Sider>
-        <Layout className=" flex flex-col h-screen">
-          <div className=" h-16"></div>
+        <Layout className=" flex flex-col h-screen overflow-hidden">
           <div className=" px-4 pb-4 overflow-y-scroll overflow-x-hidden">
             <Routes>
               <Route
@@ -81,8 +86,8 @@ const App = () => {
                 path="/"
                 element={<Navigate to="/company" replace={true} />}
               />
-              <Route exact path="/company" element={<CompanyInformation />} />
-              <Route exact path="/employee" element={<EmployeeInformation />} />
+              {/* <Route exact path="/company" element={<CompanyInformation />} />
+              <Route exact path="/employee" element={<EmployeeInformation />} /> */}
               <Route
                 exact
                 path="/all-companies"
