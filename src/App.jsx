@@ -84,7 +84,7 @@ const App = () => {
               <Route
                 exact
                 path="/"
-                element={<Navigate to="/company" replace={true} />}
+                element={<Navigate to="/all-companies" replace={true} />}
               />
               {/* <Route exact path="/company" element={<CompanyInformation />} />
               <Route exact path="/employee" element={<EmployeeInformation />} /> */}
